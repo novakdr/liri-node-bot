@@ -98,7 +98,7 @@ function spotifyThis(song) {
     spotifyKey.search({
       type: 'track',
       query: 'The Sign'
-    }, function(err, data) {
+    }, (err, data) => {
 
       if (err) {
 
@@ -120,7 +120,7 @@ function spotifyThis(song) {
     spotifyKey.search({
       type: 'track',
       query: song
-    }, function(err, data) {
+    }, (err, data) => {
 
       if (err) {
         return console.log('Error occurred: ' + err);
