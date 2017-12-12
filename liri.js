@@ -42,23 +42,23 @@ for (let i = 3; i < args.length; i++) {
 switch (action) {
   case 'my-tweets':
     tweetThis();
-  break;
+    break;
 
   case 'spotify-this-song':
     spotifyThis(input);
-  break;
+    break;
 
   case 'movie-this':
     movieThis(input);
-  break;
+    break;
 
   case 'do-what-it-says':
     sayThis();
-  break;
+    break;
 
   default:
     console.log("Please input one of the following: my-tweets, spotify-this-song, movie-this, or do-what-it-says");
-  break;
+    break;
 }
 
 
@@ -66,9 +66,13 @@ switch (action) {
 function tweetThis() {
 
   //PARAMETERS TO GRAB AND OUTPUT TWEETS
-  let params = {screen_name: 'lhommeabsurde', count: 20, trim_user: true};
+  let params = {
+    screen_name: 'lhommeabsurde',
+    count: 20,
+    trim_user: true
+  };
 
-  client.get('statuses/user_timeline', params, function(error, tweets, response) {
+  client.get('statuses/user_timeline', params, (error, tweets, response) => {
 
     let tweetArray = tweets;
 
@@ -91,7 +95,10 @@ function spotifyThis(song) {
 
   if (song === '') {
 
-    spotifyKey.search({ type: 'track', query: 'The Sign' }, function(err, data) {
+    spotifyKey.search({
+      type: 'track',
+      query: 'The Sign'
+    }, function(err, data) {
 
       if (err) {
 
@@ -110,7 +117,10 @@ function spotifyThis(song) {
 
   } else {
 
-    spotifyKey.search({ type: 'track', query: song }, function(err, data) {
+    spotifyKey.search({
+      type: 'track',
+      query: song
+    }, function(err, data) {
 
       if (err) {
         return console.log('Error occurred: ' + err);
@@ -142,7 +152,7 @@ function movieThis(movie) {
 
     let mrNobody = "http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&apikey=trilogy";
 
-    request(mrNobody, function(error, response, body) {
+    request(mrNobody, (error, response, body) => {
 
       let newBody = JSON.parse(body);
 
@@ -159,10 +169,10 @@ function movieThis(movie) {
         console.log('An error occured');
       }
     });
-    
+
   } else {
 
-    request(queryUrl, function(error, response, body) {
+    request(queryUrl, (error, response, body) => {
 
       let newBody = JSON.parse(body);
 
@@ -186,7 +196,7 @@ function movieThis(movie) {
 
 //DO WHAT IT SAYS FUNCTION
 function sayThis() {
-  fs.readFile('random.txt', 'utf8', function(err, data) {
+  fs.readFile('random.txt', 'utf8', (err, data) => {
 
     if (err) {
       return console.log(err);
